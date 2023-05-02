@@ -322,6 +322,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1080470042}
+  _followSharpness: 0.001
 --- !u!1 &827018699
 GameObject:
   m_ObjectHideFlags: 0
