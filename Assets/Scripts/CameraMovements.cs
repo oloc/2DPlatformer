@@ -3,11 +3,9 @@ using UnityEngine;
 public class CameraMovements : MonoBehaviour
 {
     [Header("Objects")]
-    [SerializeField]
-    public Transform player;
+    [SerializeField] private Transform player;
     [Header("Parameters")]
-    [SerializeField]
-    private float _followSharpness;
+    [SerializeField] private float _followSharpness;
 
     // Update is called once per frame
     void Update()

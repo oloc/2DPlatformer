@@ -3,21 +3,14 @@ using UnityEngine;
 public class PlayerMovements : MonoBehaviour
 {
     [Header("Objects")]
-    [SerializeField]
-    private Transform _groundCheckLeft;
-    [SerializeField]
-    private Transform _groundCheckRight;
-    [SerializeField]
-    private GameObject _playerLeft;
-    [SerializeField]
-    private GameObject _playerRight;
+    [SerializeField] private Transform _groundCheckLeft;
+    [SerializeField] private Transform _groundCheckRight;
+    [SerializeField] private GameObject _playerLeft;
+    [SerializeField] private GameObject _playerRight;
     [Header("Parameters")]
-    [SerializeField]
-    private float _playerSpeed;
-    [SerializeField]
-    private float _playerJumpForce;
-    [SerializeField]
-    private int _maxJump;
+    [SerializeField] private float _playerSpeed;
+    [SerializeField] private float _playerJumpForce;
+    [SerializeField] private int _maxJump;
 
     // Private Elements
     private Rigidbody2D _rigidBody;
