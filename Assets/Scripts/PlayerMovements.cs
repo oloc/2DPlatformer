@@ -5,8 +5,7 @@ public class PlayerMovements : MonoBehaviour
     [Header("Objects")]
     [SerializeField] private Transform _groundCheckLeft;
     [SerializeField] private Transform _groundCheckRight;
-    [SerializeField] private GameObject _playerLeft;
-    [SerializeField] private GameObject _playerRight;
+    [SerializeField] private LayerMask _layerMask;
     [Header("Parameters")]
     [SerializeField] private float _playerSpeed;
     [SerializeField] private float _playerJumpForce;
@@ -14,9 +13,9 @@ public class PlayerMovements : MonoBehaviour
 
     // Private Elements
     private Rigidbody2D _rigidBody;
+    private Transform _transform;
     private float _moveInput;
     private bool _jumpInput;
-    private Vector2 _jumpVector = new Vector2(0.0f, 1.0f);
     private int _numberOfJump;
 
     // Flags
@@ -28,8 +27,7 @@ public class PlayerMovements : MonoBehaviour
     private void Awake()
     {
         _rigidBody = GetComponent<Rigidbody2D>();
-        _playerRight.SetActive(true);
-        _playerLeft.SetActive(false);
+        _transform = transform;
         _numberOfJump = 0;
     }
 
@@ -39,45 +37,48 @@ public class PlayerMovements : MonoBehaviour
         _rigidBody.velocity = new Vector2(_moveInput * _playerSpeed, _rigidBody.velocity.y);
     }
 
-    private void JumpAction()
-    {
-        if (_numberOfJump < _maxJump)
-        {
-            _numberOfJump++;
-            _isGrounded = false;
-            _rigidBody.AddForce(_jumpVector * _playerJumpForce, ForceMode2D.Impulse);
-        }
-    }
-
     // Update is called once per frame
     private void Update()
     {
         _jumpInput = Input.GetButtonDown(JUMP_INPUT_NAME);
         _moveInput = Input.GetAxisRaw(HORIZONTAL_INPUT_NAME);
 
+        TurnCharacter();
+        CheckGrounded();
+        JumpAction();
+    }
+
+    private void CheckGrounded()
+    {
         // is grounded check only on fall
         if (_rigidBody.velocity.y < 0f)
         {
-            _isGrounded = Physics2D.OverlapArea(_groundCheckRight.position, _groundCheckLeft.position);
+            _isGrounded = Physics2D.OverlapArea(_groundCheckRight.position, _groundCheckLeft.position, _layerMask);
+            if (_isGrounded)
+            {
+                _numberOfJump = 0;
+            }
         }
-        if (_isGrounded)
+    }
+    private void JumpAction()
+    {
+        if (_jumpInput && _numberOfJump < _maxJump)
         {
-            _numberOfJump = 0;
+            _numberOfJump++;
+            _isGrounded = false;
+            _rigidBody.AddForce(Vector2.up * _playerJumpForce, ForceMode2D.Impulse);
         }
+    }
+
+    private void TurnCharacter()
+    {
         if (_moveInput < 0)
         {
-            _playerRight.SetActive(false);
-            _playerLeft.SetActive(true);
+            _transform.right = Vector2.left;
         }
         else if (_moveInput > 0)
         {
-            _playerRight.SetActive(true);
-            _playerLeft.SetActive(false);
-        }
-
-        if (_jumpInput)
-        {
-            JumpAction();
+            _transform.right = Vector2.right;
         }
     }
 }
