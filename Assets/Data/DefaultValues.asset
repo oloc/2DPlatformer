@@ -13,5 +13,4 @@ MonoBehaviour:
   m_Name: DefaultValues
   m_EditorClassIdentifier: 
   score: 0
-  alePoints: 10
-  muttonPoints: 5
+  playerPosition: {x: -32, y: 3.6, z: 0}
