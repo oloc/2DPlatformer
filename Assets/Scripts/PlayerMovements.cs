@@ -14,6 +14,7 @@ public class PlayerMovements : MonoBehaviour
     // Private Elements
     private Rigidbody2D _rigidBody;
     private Transform _transform;
+    private Animator _animator;
     private float _moveInput;
     private bool _jumpInput;
     private int _numberOfJump;
@@ -27,6 +28,7 @@ public class PlayerMovements : MonoBehaviour
     private void Awake()
     {
         _rigidBody = GetComponent<Rigidbody2D>();
+        _animator = GetComponent<Animator>();
         _transform = transform;
         _numberOfJump = 0;
     }
@@ -43,6 +45,17 @@ public class PlayerMovements : MonoBehaviour
         _jumpInput = Input.GetButtonDown(JUMP_INPUT_NAME);
         _moveInput = Input.GetAxisRaw(HORIZONTAL_INPUT_NAME);
 
+        if (Mathf.Abs(_moveInput) > 0)
+        {
+            _animator.SetBool("isIdle", false);
+            _animator.SetBool("isWalking", true);
+        }
+        else
+        {
+            _animator.SetBool("isIdle", true);
+            _animator.SetBool("isWalking", false);
+        }
+
         TurnCharacter();
         CheckGrounded();
         JumpAction();
@@ -53,11 +66,16 @@ public class PlayerMovements : MonoBehaviour
         // is grounded check only on fall
         if (_rigidBody.velocity.y < 0f)
         {
+            _animator.SetBool("isFalling", true);
             _isGrounded = Physics2D.OverlapArea(_groundCheckRight.position, _groundCheckLeft.position, _layerMask);
             if (_isGrounded)
             {
                 _numberOfJump = 0;
             }
+        }
+        else
+        {
+            _animator.SetBool("isFalling", false);
         }
     }
     private void JumpAction()
@@ -67,6 +85,15 @@ public class PlayerMovements : MonoBehaviour
             _numberOfJump++;
             _isGrounded = false;
             _rigidBody.AddForce(Vector2.up * _playerJumpForce, ForceMode2D.Impulse);
+        }
+        if (_rigidBody.velocity.y > 0f)
+        {
+            _animator.SetBool("isIdle", false);
+            _animator.SetBool("isJumping", true);
+        }
+        else
+        {
+            _animator.SetBool("isJumping", false);
         }
     }
 
