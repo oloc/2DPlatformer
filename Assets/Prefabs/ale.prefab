@@ -147,3 +147,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameValues: {fileID: 11400000, guid: 1e87e8797511725448b9ec2ccaf0550b, type: 2}
+  points: 10
