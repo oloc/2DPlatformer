@@ -55,10 +55,28 @@ public class PlayerMovements : MonoBehaviour
             _animator.SetBool("isIdle", true);
             _animator.SetBool("isWalking", false);
         }
-
+        Debug.Log(transform.parent);
         TurnCharacter();
         CheckGrounded();
         JumpAction();
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.transform.CompareTag("Mobile"))
+        {
+            Debug.Log("Mobile Detected");
+            transform.parent = collision.transform;
+        }
+        else
+        {
+            transform.parent = null;
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        transform.parent = null;
     }
 
     private void CheckGrounded()
