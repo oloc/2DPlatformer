@@ -5,4 +5,5 @@ using UnityEngine;
 public class GameValues : ScriptableObject
 {
     public int score;
+    public Vector3 playerPosition;
 }
