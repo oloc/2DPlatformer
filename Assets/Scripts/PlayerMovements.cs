@@ -67,7 +67,7 @@ public class PlayerMovements : MonoBehaviour
         if (_rigidBody.velocity.y < 0f)
         {
             _animator.SetBool("isFalling", true);
-            _animator.SetBool("isJump", false);
+            _animator.SetBool("isJumping", false);
             _isGrounded = Physics2D.OverlapArea(_groundCheckRight.position, _groundCheckLeft.position, _layerMask);
             if (_isGrounded)
             {
