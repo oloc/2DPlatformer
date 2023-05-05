@@ -1,11 +1,17 @@
-using System.Collections;
 using UnityEngine;
 
 public class ExitDoor : MonoBehaviour
 {
     [SerializeField] private GameValues _currentValues;
     [SerializeField] private GameObject _winTextObject;
-    [SerializeField] private float _waitBeforeClose;
+
+    private Animator _animator;
+
+    private void Awake()
+    {
+        _animator = GetComponent<Animator>();
+        _animator.SetBool("isOpened", false);
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -13,13 +19,12 @@ public class ExitDoor : MonoBehaviour
         {
             _currentValues.score += 100;
             _winTextObject.SetActive(true);
-            StartCoroutine(Close(_waitBeforeClose));
+            _animator.SetBool("isOpened", true);
         }
     }
 
-    private IEnumerator Close(float waitTime)
+    private void Close()
     {
-        yield return new WaitForSeconds(waitTime);
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
 #else
