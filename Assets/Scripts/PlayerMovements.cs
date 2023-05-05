@@ -10,6 +10,7 @@ public class PlayerMovements : MonoBehaviour
     [SerializeField] private float _playerSpeed;
     [SerializeField] private float _playerJumpForce;
     [SerializeField] private int _maxJump;
+    [SerializeField] private float _fallGravityScale = 3f;
 
     // Private Elements
     private Rigidbody2D _rigidBody;
@@ -59,6 +60,7 @@ public class PlayerMovements : MonoBehaviour
         TurnCharacter();
         CheckGrounded();
         JumpAction();
+        BetterFalling();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -79,22 +81,29 @@ public class PlayerMovements : MonoBehaviour
         transform.parent = null;
     }
 
+    private void BetterFalling()
+    {
+        // On modifie l'échelle de gravité si le personnage est en train de tomber
+        _rigidBody.gravityScale = _rigidBody.velocity.y < 0f ? _fallGravityScale : 1f;
+    }
+
     private void CheckGrounded()
     {
         // is grounded check only on fall
         if (_rigidBody.velocity.y < 0f)
         {
-            _animator.SetBool("isFalling", true);
-            _animator.SetBool("isJumping", false);
             _isGrounded = Physics2D.OverlapArea(_groundCheckRight.position, _groundCheckLeft.position, _layerMask);
             if (_isGrounded)
             {
                 _numberOfJump = 0;
+                _animator.SetBool("isFalling", false);
             }
-        }
-        else
-        {
-            _animator.SetBool("isFalling", false);
+            else
+            {
+                _animator.SetBool("isFalling", true);
+                _animator.SetBool("isJumping", false);
+
+            }
         }
     }
     private void JumpAction()
@@ -104,16 +113,10 @@ public class PlayerMovements : MonoBehaviour
             _numberOfJump++;
             _isGrounded = false;
             _rigidBody.AddForce(Vector2.up * _playerJumpForce, ForceMode2D.Impulse);
-        }
-        if (_rigidBody.velocity.y > 0f)
-        {
+            // Animation Flags
             _animator.SetBool("isIdle", false);
             _animator.SetBool("isJumping", true);
             _animator.SetBool("isFalling", false);
-        }
-        else
-        {
-            _animator.SetBool("isJumping", false);
         }
     }
 
