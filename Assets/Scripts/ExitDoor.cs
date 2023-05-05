@@ -8,7 +8,7 @@ public class ExitDoor : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.transform.CompareTag("Player"))
+        if (collision.transform.CompareTag(Player.playerTag))
         {
             _currentValues.score += 100;
             _winTextObject.SetActive(true);

@@ -9,7 +9,7 @@ public class DeadZone : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.GetComponent<Collider2D>().CompareTag("Player"))
+        if (collision.GetComponent<Collider2D>().CompareTag(Player.playerTag))
         {
             _playerTransform.position = _defaultValues.playerPosition;
         }

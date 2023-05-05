@@ -31,7 +31,7 @@ public class Column : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.collider.CompareTag("Player") && !_hurted)
+        if (collision.collider.CompareTag(Player.playerTag) && !_hurted)
         {
             _health--;
             _hurted = true;
