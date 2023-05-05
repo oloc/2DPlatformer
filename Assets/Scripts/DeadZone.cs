@@ -2,10 +2,8 @@ using UnityEngine;
 
 public class DeadZone : MonoBehaviour
 {
-
     [SerializeField] private GameValues _defaultValues;
     [SerializeField] private Transform _playerTransform;
-
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -14,5 +12,4 @@ public class DeadZone : MonoBehaviour
             _playerTransform.position = _defaultValues.playerPosition;
         }
     }
-
 }
