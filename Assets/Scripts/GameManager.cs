@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        _currentValues.score = 0;
+        _currentValues.score = _defaultValues.score;
         _playerTransform.position = _defaultValues.playerPosition;
     }
 
