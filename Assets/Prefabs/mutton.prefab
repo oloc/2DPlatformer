@@ -146,5 +146,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38a56cde57ab43d4fb644e42bf189523, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameValues: {fileID: 11400000, guid: 1e87e8797511725448b9ec2ccaf0550b, type: 2}
-  points: 5
+  _gameValues: {fileID: 11400000, guid: 1e87e8797511725448b9ec2ccaf0550b, type: 2}
+  _itemPoints: 0
