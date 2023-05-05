@@ -56,7 +56,6 @@ public class PlayerMovements : MonoBehaviour
             _animator.SetBool("isIdle", true);
             _animator.SetBool("isWalking", false);
         }
-        Debug.Log(transform.parent);
         TurnCharacter();
         CheckGrounded();
         JumpAction();
@@ -67,7 +66,6 @@ public class PlayerMovements : MonoBehaviour
     {
         if (collision.transform.CompareTag("Mobile"))
         {
-            Debug.Log("Mobile Detected");
             transform.parent = collision.transform;
         }
         else

@@ -1,5 +1,4 @@
 using UnityEngine;
-using TMPro;
 
 public class ExitDoor : MonoBehaviour
 {
@@ -12,7 +11,6 @@ public class ExitDoor : MonoBehaviour
         {
             _currentValues.score += 100;
             _winTextObject.SetActive(true);
-            Debug.Log("Win the game!");
         }
     }
 }

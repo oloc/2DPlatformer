@@ -10,17 +10,10 @@ public class Column : MonoBehaviour
     private int _health;
     private bool _hurted;
 
-
     private void Awake()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _health = 3;
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        Debug.Log($"Start: {_health}");
     }
 
     // Update is called once per frame
