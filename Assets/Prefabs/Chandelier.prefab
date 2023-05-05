@@ -44,7 +44,6 @@ GameObject:
   - component: {fileID: 8222703524412915916}
   - component: {fileID: 3425302328802265645}
   - component: {fileID: 3766712890032257419}
-  - component: {fileID: 8285704197237671329}
   - component: {fileID: 6446991867159148228}
   m_Layer: 0
   m_Name: Chandelier
@@ -165,30 +164,6 @@ HingeJoint2D:
   m_AngleLimits:
     m_LowerAngle: 0
     m_UpperAngle: 359
---- !u!68 &8285704197237671329
-EdgeCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7769410784011981977}
-  m_Enabled: 0
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_EdgeRadius: 0
-  m_Points:
-  - {x: 0.07662082, y: -0.0629012}
-  - {x: 2, y: -3}
-  - {x: -2, y: -3}
-  - {x: -0.08400178, y: -0.09584743}
-  m_AdjacentStartPoint: {x: 0, y: 0}
-  m_AdjacentEndPoint: {x: 0, y: 0}
-  m_UseAdjacentStartPoint: 0
-  m_UseAdjacentEndPoint: 0
 --- !u!61 &6446991867159148228
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -32,6 +32,7 @@ public class PlayerMovements : MonoBehaviour
         _animator = GetComponent<Animator>();
         _transform = transform;
         _numberOfJump = 0;
+        _animator.SetBool("isIdle", true);
     }
 
     private void FixedUpdate()
