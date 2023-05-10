@@ -18,7 +18,7 @@ public class PlayerMovements : MonoBehaviour
     private Animator _animator;
     private float _moveInput;
     private bool _jumpInput;
-    private int _numberOfJump;
+    private int _jumpCount;
 
     // Flags
     private bool _isGrounded = false;
@@ -31,7 +31,7 @@ public class PlayerMovements : MonoBehaviour
         _rigidBody = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
         _transform = transform;
-        _numberOfJump = 0;
+        _jumpCount = 0;
         _animator.SetBool("isIdle", true);
     }
 
@@ -94,7 +94,7 @@ public class PlayerMovements : MonoBehaviour
             _isGrounded = Physics2D.OverlapArea(_groundCheckRight.position, _groundCheckLeft.position, _layerMask);
             if (_isGrounded)
             {
-                _numberOfJump = 0;
+                _jumpCount = 0;
                 _animator.SetBool("isFalling", false);
             }
             else
@@ -107,9 +107,9 @@ public class PlayerMovements : MonoBehaviour
     }
     private void JumpAction()
     {
-        if (_jumpInput && _numberOfJump < _maxJump)
+        if (_jumpInput && _jumpCount < _maxJump)
         {
-            _numberOfJump++;
+            _jumpCount++;
             _isGrounded = false;
             _rigidBody.AddForce(Vector2.up * _playerJumpForce, ForceMode2D.Impulse);
             // Animation Flags
